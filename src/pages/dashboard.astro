@@ -1,0 +1,11 @@
+---
+import MainApp from './MainApp';
+import Layout from '../layouts/Layout.astro';
+import { ProtectedRoute } from '../components';
+---
+
+<Layout title="8Financial - Dashboard">
+  <ProtectedRoute client:load requireAuth={true}>
+	<MainApp client:load />
+  </ProtectedRoute>
+</Layout>

@@ -1,0 +1,141 @@
+---
+export interface Props {
+	title?: string;
+	description?: string;
+}
+
+const { 
+	title = "8Financial - Gestión Financiera Inteligente",
+	description = "Gestiona tus finanzas personales de manera inteligente con 8Financial" 
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="description" content={description} />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body>
+		<slot />
+		<!-- Firma flotante con efecto cristal -->
+		<div class="floating-signature">
+			<span>ByPL8 <span class="heart">♥</span></span>
+		</div>
+	</body>
+	</body>
+</html>
+
+<style is:global>
+	html,
+	body {
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		height: 100%;
+		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+			'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+			sans-serif;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	* {
+		box-sizing: border-box;
+	}
+
+	/* Mejoras para móvil */
+	
+	/* Hacer que los elementos táctiles sean más grandes en móvil */
+	.touch-manipulation {
+		touch-action: manipulation;
+	}
+
+	/* Mejorar el scroll en móvil */
+	@supports (-webkit-overflow-scrolling: touch) {
+		* {
+			-webkit-overflow-scrolling: touch;
+		}
+	}
+
+	/* Prevenir zoom en inputs en iOS */
+	@media screen and (max-width: 767px) {
+		input[type="email"],
+		input[type="password"],
+		input[type="text"],
+		input[type="number"],
+		textarea,
+		select {
+			font-size: 16px !important;
+		}
+	}
+
+	/* Mejorar la legibilidad en pantallas pequeñas */
+	@media (max-width: 640px) {
+		body {
+			font-size: 14px;
+			line-height: 1.5;
+		}
+	}
+
+	/* Firma flotante con efecto cristal */
+	.floating-signature {
+		position: fixed;
+		bottom: 12px;
+		left: 12px;
+		z-index: 9999;
+		pointer-events: none;
+		
+		/* Efecto cristal */
+		background: rgba(255, 255, 255, 0.1);
+		backdrop-filter: blur(10px);
+		-webkit-backdrop-filter: blur(10px);
+		border: 1px solid rgba(255, 255, 255, 0.2);
+		border-radius: 8px;
+		padding: 6px 10px;
+		
+		/* Sombra suave */
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 
+		            0 1px 3px rgba(0, 0, 0, 0.08);
+		
+		/* Texto */
+		font-size: 12px;
+		font-weight: 500;
+		letter-spacing: 0.5px;
+		color: rgba(107, 114, 128, 0.8);
+		
+		/* Animación sutil */
+		transition: all 0.3s ease;
+	}
+
+	/* Tamaños responsivos */
+	@media (min-width: 640px) {
+		.floating-signature {
+			bottom: 16px;
+			left: 16px;
+			padding: 8px 12px;
+			font-size: 14px;
+		}
+	}
+
+	.floating-signature:hover {
+		background: rgba(255, 255, 255, 0.15);
+		transform: translateY(-1px);
+	}
+
+	.floating-signature .heart {
+		color: #ec4899;
+		margin-left: 2px;
+	}
+
+	/* Asegurar que funcione en fondos oscuros también */
+	.dark .floating-signature {
+		background: rgba(0, 0, 0, 0.3);
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		color: rgba(255, 255, 255, 0.7);
+	}
+</style>
